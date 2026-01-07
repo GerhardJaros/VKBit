@@ -1,0 +1,62 @@
+<div class="container">
+  <h2>Komponenten-Beispiel</h2>
+  
+  <!-- Interpolation -->
+  <h3>1. Interpolation (One-Way Data Binding)</h3>
+  <p>Titel: {{ titel }}</p>
+  <p>Zähler: {{ zaehler }}</p>
+  
+  <!-- Property Binding -->
+  <h3>2. Property Binding</h3>
+  <img [src]="bildUrl" [alt]="bildAlt" width="100">
+  <button [disabled]="istDeaktiviert">Deaktivierter Button</button>
+  
+  <!-- Event Binding -->
+  <h3>3. Event Binding</h3>
+  <button (click)="erhoeheZaehler()">Zähler erhöhen</button>
+  <button (click)="verringereZaehler()">Zähler verringern</button>
+  
+  <!-- Control Flow: @if -->
+  <h3>4. Control Flow - &#64;if (Angular 17+)</h3>
+  @if (zaehler > 5) {
+    <p class="success">Zähler ist größer als 5!</p>
+  } @else if (zaehler > 0) {
+    <p class="warning">Zähler ist zwischen 1 und 5</p>
+  } @else {
+    <p class="error">Zähler ist 0 oder negativ</p>
+  }
+  
+  <!-- Control Flow: @for -->
+  <h3>5. Control Flow - &#64;for (Angular 17+)</h3>
+  <ul>
+    @for (item of items; track item.id) {
+      <li>{{ item.name }} - {{ item.beschreibung }}</li>
+    } @empty {
+      <li>Keine Items vorhanden</li>
+    }
+  </ul>
+  
+  <!-- Control Flow: @switch -->
+  <h3>6. Control Flow - &#64;switch</h3>
+  @switch (status) {
+    @case ('aktiv') {
+      <span class="badge success">Aktiv</span>
+    }
+    @case ('inaktiv') {
+      <span class="badge error">Inaktiv</span>
+    }
+    @case ('wartend') {
+      <span class="badge warning">Wartend</span>
+    }
+    @default {
+      <span class="badge">Unbekannt</span>
+    }
+  }
+  <button (click)="wechsleStatus()">Status wechseln</button>
+  
+  <!-- Template Expression -->
+  <h3>7. Template Expressions</h3>
+  <p>Summe: {{ zaehler + 10 }}</p>
+  <p>Verdoppelt: {{ zaehler * 2 }}</p>
+  <p>Methodenaufruf: {{ berechneQuadrat(zaehler) }}</p>
+</div>

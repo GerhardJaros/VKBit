@@ -1,0 +1,128 @@
+<div class="container">
+  <h2>State Management</h2>
+  
+  <!-- Signals (Angular 16+) -->
+  <section>
+    <h3>1. Signals (Angular 16+)</h3>
+    <div class="signal-demo">
+      <p>Zähler: <strong>{{ zaehler() }}</strong></p>
+      <p>Verdoppelt: <strong>{{ zaehlerVerdoppelt() }}</strong></p>
+      <p>Ist gerade: <strong>{{ istGerade() ? 'Ja' : 'Nein' }}</strong></p>
+      
+      <div class="controls">
+        <button (click)="erhoeheZaehler()">+ Erhöhen</button>
+        <button (click)="verringereZaehler()">- Verringern</button>
+        <button (click)="zuruecksetzen()">Zurücksetzen</button>
+      </div>
+    </div>
+  </section>
+  
+  <!-- RxJS Observables -->
+  <section>
+    <h3>2. RxJS Observables & Streams</h3>
+    <div class="rxjs-demo">
+      <p>Live-Zeit: <strong>{{ aktuelleZeit$ | async }}</strong></p>
+      <p>Suchergebnis: <strong>{{ suchErgebnis }}</strong></p>
+      
+      <input 
+        type="text" 
+        [(ngModel)]="suchbegriff"
+        (ngModelChange)="onSuche($event)"
+        placeholder="Suche mit Debounce (500ms)">
+    </div>
+  </section>
+  
+  <!-- Redux Pattern (Todo-Liste) -->
+  <section>
+    <h3>3. Redux Pattern (Todo-Liste)</h3>
+    <div class="redux-demo">
+      <div class="todo-input">
+        <input 
+          type="text" 
+          [(ngModel)]="neuesTodo"
+          (keyup.enter)="todoHinzufuegen()"
+          placeholder="Neues Todo eingeben">
+        <button (click)="todoHinzufuegen()">Hinzufügen</button>
+      </div>
+      
+      <div class="stats">
+        <span class="badge">Gesamt: {{ (todos$ | async)?.length || 0 }}</span>
+        <span class="badge success">Erledigt: {{ erledigteTodos }}</span>
+        <span class="badge warning">Offen: {{ offeneTodos }}</span>
+      </div>
+      
+      <div class="filter-buttons">
+        <button 
+          [class.active]="filter === 'alle'"
+          (click)="setFilter('alle')">
+          Alle
+        </button>
+        <button 
+          [class.active]="filter === 'offen'"
+          (click)="setFilter('offen')">
+          Offen
+        </button>
+        <button 
+          [class.active]="filter === 'erledigt'"
+          (click)="setFilter('erledigt')">
+          Erledigt
+        </button>
+      </div>
+      
+      <ul class="todo-list">
+        @for (todo of gefilterteTodos$ | async; track todo.id) {
+          <li [class.completed]="todo.erledigt">
+            <input 
+              type="checkbox" 
+              [checked]="todo.erledigt"
+              (change)="todoToggle(todo.id)">
+            <span>{{ todo.titel }}</span>
+            <button class="delete-btn" (click)="todoLoeschen(todo.id)">✗</button>
+          </li>
+        } @empty {
+          <li class="empty">Keine Todos vorhanden</li>
+        }
+      </ul>
+      
+      @if ((todos$ | async)?.length ?? 0 > 0) {
+        <div class="actions">
+          <button (click)="alleLoeschen()">Alle löschen</button>
+        </div>
+      }
+    </div>
+  </section>
+  
+  <!-- State Erklärungen -->
+  <section class="explanation">
+    <h3>State Management Konzepte:</h3>
+    <div class="concept">
+      <h4>Signals</h4>
+      <ul>
+        <li>Feingranulare Reaktivität</li>
+        <li>Automatische Change Detection</li>
+        <li>Computed Values</li>
+        <li>Effects für Side-Effects</li>
+      </ul>
+    </div>
+    
+    <div class="concept">
+      <h4>RxJS Observables</h4>
+      <ul>
+        <li>Asynchrone Datenströme</li>
+        <li>Operatoren für Transformation</li>
+        <li>Subscription Management</li>
+        <li>Error Handling</li>
+      </ul>
+    </div>
+    
+    <div class="concept">
+      <h4>Redux Pattern</h4>
+      <ul>
+        <li>Single Source of Truth</li>
+        <li>Immutable State Updates</li>
+        <li>Actions & Reducers</li>
+        <li>Predictable State Management</li>
+      </ul>
+    </div>
+  </section>
+</div>

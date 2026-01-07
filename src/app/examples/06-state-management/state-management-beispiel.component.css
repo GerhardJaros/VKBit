@@ -1,0 +1,187 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h2 {
+  color: #dd0031;
+  border-bottom: 2px solid #dd0031;
+  padding-bottom: 10px;
+}
+
+h3 {
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+section {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+button {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #dd0031;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #c50028;
+}
+
+button.active {
+  background-color: #28a745;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.signal-demo,
+.rxjs-demo,
+.redux-demo {
+  padding: 20px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.todo-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stats {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.badge {
+  padding: 5px 15px;
+  border-radius: 20px;
+  background-color: #6c757d;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.badge.success {
+  background-color: #28a745;
+}
+
+.badge.warning {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-buttons button {
+  background-color: #6c757d;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.todo-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.todo-list li.completed {
+  opacity: 0.6;
+}
+
+.todo-list li.completed span {
+  text-decoration: line-through;
+}
+
+.todo-list li.empty {
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.todo-list input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.todo-list span {
+  flex: 1;
+}
+
+.delete-btn {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  font-size: 1rem;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.actions button {
+  background-color: #6c757d;
+}
+
+.explanation {
+  background-color: #e3f2fd;
+}
+
+.concept {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.concept h4 {
+  margin-top: 0;
+  color: #dd0031;
+}
+
+.concept ul {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+.concept li {
+  margin: 8px 0;
+}

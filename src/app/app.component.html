@@ -1,0 +1,32 @@
+<div class="app-container">
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a routerLink="/">
+        <span class="logo">🅰️</span>
+        <span class="title">Angular Schulung</span>
+      </a>
+    </div>
+    
+    <ul class="nav-menu">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+      <li><a [routerLink]="ROUTES.KOMPONENTEN" routerLinkActive="active">Komponenten</a></li>
+      <li><a [routerLink]="ROUTES.FORMULARE" routerLinkActive="active">Formulare</a></li>
+      <li><a [routerLink]="ROUTES.KOMMUNIKATION" routerLinkActive="active">Kommunikation</a></li>
+      <li><a [routerLink]="ROUTES.ROUTING" routerLinkActive="active">Routing</a></li>
+      <li><a [routerLink]="ROUTES.OAUTH" routerLinkActive="active">OAuth</a></li>
+      <li><a [routerLink]="ROUTES.STATE_MANAGEMENT" routerLinkActive="active">State</a></li>
+      <li><a [routerLink]="ROUTES.SEPARATION" routerLinkActive="active">DI</a></li>
+      <li><a [routerLink]="ROUTES.RXJS" routerLinkActive="active">RxJS</a></li>
+      <li><a [routerLink]="ROUTES.PIPES" routerLinkActive="active">Pipes</a></li>
+    </ul>
+  </nav>
+  
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+  
+  <footer class="footer">
+    <p>Angular Schulung © 2026 | Alle Rechte vorbehalten</p>
+  </footer>
+</div>
+

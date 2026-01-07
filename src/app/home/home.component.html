@@ -1,0 +1,149 @@
+<div class="hero">
+  <h1>Angular Schulung</h1>
+  <p class="subtitle">Umfassende Beispiele für Angular-Konzepte und Best Practices</p>
+  
+  @if (istAngemeldet) {
+    <div class="user-info">
+      <span>Angemeldet als: <strong>{{ benutzer?.benutzername }}</strong></span>
+      <button class="logout-btn" (click)="logout()">Abmelden</button>
+    </div>
+  }
+</div>
+
+<div class="container">
+  <section class="themen-section">
+    <h2>Auffrischung & Vertiefung</h2>
+    <div class="themen-grid">
+      <div class="thema-card" (click)="navigateTo(ROUTES.KOMPONENTEN)">
+        <div class="thema-icon">🧩</div>
+        <h3>Komponenten</h3>
+        <p>Aufbau, Templates, Control Flow, Datenbindung</p>
+        <ul>
+          <li>Template Syntax</li>
+          <li>&#64;if, &#64;for, &#64;switch</li>
+          <li>Property & Event Binding</li>
+        </ul>
+      </div>
+      
+      <div class="thema-card" (click)="navigateTo(ROUTES.FORMULARE)">
+        <div class="thema-icon">📝</div>
+        <h3>Formulare</h3>
+        <p>Reactive Forms, Two-Way Binding, Validierung</p>
+        <ul>
+          <li>Reactive Forms</li>
+          <li>Template-Reference-Variablen</li>
+          <li>Validierung</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <section class="themen-section">
+    <h2>Neue Themenbereiche</h2>
+    <div class="themen-grid">
+      <div class="thema-card" (click)="navigateTo(ROUTES.KOMMUNIKATION)">
+        <div class="thema-icon">🔄</div>
+        <h3>Komponenten-Kommunikation</h3>
+        <p>Input/Output, ViewChild, Content Projection</p>
+        <ul>
+          <li>&#64;Input / &#64;Output</li>
+          <li>EventEmitter</li>
+          <li>Content Projection</li>
+        </ul>
+      </div>
+      
+      <div class="thema-card" (click)="navigateTo(ROUTES.ROUTING)">
+        <div class="thema-icon">🗺️</div>
+        <h3>Routing</h3>
+        <p>Guards, Route Constants, Lazy Loading</p>
+        <ul>
+          <li>Route Guards</li>
+          <li>Programmatische Navigation</li>
+          <li>Route-Parameter</li>
+        </ul>
+      </div>
+      
+      <div class="thema-card" (click)="navigateTo(ROUTES.OAUTH)">
+        <div class="thema-icon">🔒</div>
+        <h3>OAuth & Authentication</h3>
+        <p>Berechtigungssystem, Guards, Token</p>
+        <ul>
+          <li>Login/Logout</li>
+          <li>OAuth-Provider</li>
+          <li>Rollen & Berechtigungen</li>
+        </ul>
+      </div>
+      
+      <div class="thema-card" [class.protected]="!istAngemeldet" (click)="navigateTo(ROUTES.STATE_MANAGEMENT)">
+        <div class="thema-icon">📊</div>
+        <h3>State Management</h3>
+        <p>Signals, RxJS, Redux Pattern</p>
+        @if (!istAngemeldet) {
+          <div class="protected-badge">🔒 Login erforderlich</div>
+        }
+        <ul>
+          <li>Signals (Angular 16+)</li>
+          <li>RxJS Streams</li>
+          <li>Redux Pattern</li>
+        </ul>
+      </div>
+      
+      <div class="thema-card" (click)="navigateTo(ROUTES.SEPARATION)">
+        <div class="thema-icon">⚙️</div>
+        <h3>Separation of Concerns</h3>
+        <p>Dependency Injection, Services, Scopes</p>
+        <ul>
+          <li>Dependency Injection</li>
+          <li>Service Scopes</li>
+          <li>Best Practices</li>
+        </ul>
+      </div>
+      
+      <div class="thema-card" (click)="navigateTo(ROUTES.RXJS)">
+        <div class="thema-icon">🌊</div>
+        <h3>RxJS</h3>
+        <p>Observables, Operatoren, HttpClient</p>
+        <ul>
+          <li>Observables</li>
+          <li>RxJS Operatoren</li>
+          <li>HttpClient</li>
+        </ul>
+      </div>
+      
+      <div class="thema-card" (click)="navigateTo(ROUTES.PIPES)">
+        <div class="thema-icon">🔧</div>
+        <h3>Pipes & Filter</h3>
+        <p>Built-in Pipes, Custom Pipes, Transformation</p>
+        <ul>
+          <li>Built-in Pipes</li>
+          <li>Custom Pipes</li>
+          <li>Filter & Sort</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <section class="info-section">
+    <h2>Über diese Schulung</h2>
+    <p>Diese Angular-Schulungsapplikation bietet praktische Beispiele für alle wichtigen Angular-Konzepte. Jedes Thema wird mit interaktiven Komponenten und ausführlichen Erklärungen präsentiert.</p>
+    
+    <div class="features">
+      <div class="feature">
+        <h4>✨ Modern</h4>
+        <p>Angular 17+ mit Standalone Components, Signals und neuer Control Flow Syntax</p>
+      </div>
+      <div class="feature">
+        <h4>📚 Umfassend</h4>
+        <p>Alle wichtigen Themen von Basics bis Advanced</p>
+      </div>
+      <div class="feature">
+        <h4>💻 Praxisnah</h4>
+        <p>Interaktive Beispiele mit echtem Code</p>
+      </div>
+      <div class="feature">
+        <h4>🎯 Strukturiert</h4>
+        <p>Klare Gliederung und Best Practices</p>
+      </div>
+    </div>
+  </section>
+</div>

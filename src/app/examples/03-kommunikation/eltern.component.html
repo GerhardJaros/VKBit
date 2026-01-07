@@ -1,0 +1,48 @@
+<div class="container">
+  <h2>Komponenten-Kommunikation</h2>
+  
+  <section>
+    <h3>Eltern-Komponente</h3>
+    <p>Nachricht von der Kind-Komponente: <strong>{{ nachrichtVomKind }}</strong></p>
+    <p>Zähler im Elternteil: {{ elternZaehler }}</p>
+    
+    <div class="controls">
+      <button (click)="erhoeheElternZaehler()">Eltern-Zähler erhöhen</button>
+      <button (click)="sendNachrichtAnKind()">Nachricht an Kind senden</button>
+    </div>
+  </section>
+  
+  <section>
+    <h3>Kind-Komponente 1 (&#64;Input / &#64;Output)</h3>
+    <app-kind
+      [titel]="'Erstes Kind'"
+      [zaehler]="elternZaehler"
+      [aktiv]="true"
+      (nachrichtEvent)="empfangeNachricht($event)"
+      (zaehlerGeaendert)="kindZaehlerGeaendert($event)">
+    </app-kind>
+  </section>
+  
+  <section>
+    <h3>Kind-Komponente 2 (mit eigenen Daten)</h3>
+    <app-kind
+      [titel]="'Zweites Kind'"
+      [zaehler]="42"
+      [aktiv]="false"
+      (nachrichtEvent)="empfangeNachricht($event)">
+    </app-kind>
+  </section>
+  
+  <section>
+    <h3>Kind-Komponente 3 (mit Content Projection)</h3>
+    <app-kind
+      [titel]="'Drittes Kind'"
+      [zaehler]="elternZaehler"
+      [aktiv]="true">
+      <div class="projected-content">
+        <p>Dies ist projizierter Inhalt von der Eltern-Komponente!</p>
+        <button (click)="elternZaehler = elternZaehler * 2">Verdopple Zähler</button>
+      </div>
+    </app-kind>
+  </section>
+</div>

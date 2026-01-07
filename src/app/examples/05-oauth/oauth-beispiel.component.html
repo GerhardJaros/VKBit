@@ -1,0 +1,121 @@
+<div class="container">
+  <h2>OAuth & Berechtigungssystem</h2>
+  
+  @if (!istAngemeldet) {
+    <!-- Login-Formular -->
+    <section class="login-section">
+      <h3>Login</h3>
+      
+      <form (ngSubmit)="login()" class="login-form">
+        <div class="form-group">
+          <label for="email">E-Mail:</label>
+          <input 
+            type="email" 
+            id="email" 
+            [(ngModel)]="email" 
+            name="email"
+            placeholder="admin@test.de oder user@test.de"
+            required>
+        </div>
+        
+        <div class="form-group">
+          <label for="passwort">Passwort:</label>
+          <input 
+            type="password" 
+            id="passwort" 
+            [(ngModel)]="passwort" 
+            name="passwort"
+            placeholder="admin123 oder user123"
+            required>
+        </div>
+        
+        @if (fehlerNachricht) {
+          <div class="error-message">{{ fehlerNachricht }}</div>
+        }
+        
+        <button type="submit" [disabled]="laedt">
+          {{ laedt ? 'Anmelden...' : 'Anmelden' }}
+        </button>
+      </form>
+      
+      <div class="oauth-providers">
+        <h4>Oder mit OAuth anmelden:</h4>
+        <div class="provider-buttons">
+          <button 
+            (click)="oauthLogin('google')" 
+            [disabled]="laedt"
+            class="oauth-btn google">
+            <span class="icon">G</span> Google
+          </button>
+          <button 
+            (click)="oauthLogin('github')" 
+            [disabled]="laedt"
+            class="oauth-btn github">
+            <span class="icon">⚙</span> GitHub
+          </button>
+          <button 
+            (click)="oauthLogin('microsoft')" 
+            [disabled]="laedt"
+            class="oauth-btn microsoft">
+            <span class="icon">M</span> Microsoft
+          </button>
+        </div>
+      </div>
+      
+      <div class="hint">
+        <p><strong>Testbenutzer:</strong></p>
+        <ul>
+          <li>Admin: admin&#64;test.de / admin123 (Rollen: admin, user)</li>
+          <li>User: user&#64;test.de / user123 (Rolle: user)</li>
+        </ul>
+      </div>
+    </section>
+  } @else {
+    <!-- Angemeldet -->
+    <section class="user-section">
+      <h3>Willkommen, {{ aktuellerBenutzer?.benutzername }}!</h3>
+      
+      <div class="user-info">
+        <p><strong>E-Mail:</strong> {{ aktuellerBenutzer?.email }}</p>
+        <p><strong>Benutzer-ID:</strong> {{ aktuellerBenutzer?.id }}</p>
+        <p><strong>Rollen:</strong> {{ aktuellerBenutzer?.rollen?.join(', ') }}</p>
+        <p><strong>Token:</strong> {{ aktuellerBenutzer?.token?.substring(0, 20) }}...</p>
+      </div>
+      
+      <div class="permissions">
+        <h4>Berechtigungen:</h4>
+        <div class="permission-checks">
+          <div class="permission-item">
+            <span class="badge" [class.success]="hatAdminRolle" [class.error]="!hatAdminRolle">
+              {{ hatAdminRolle ? '✓' : '✗' }}
+            </span>
+            Admin-Berechtigung
+          </div>
+          <div class="permission-item">
+            <span class="badge" [class.success]="hatUserRolle" [class.error]="!hatUserRolle">
+              {{ hatUserRolle ? '✓' : '✗' }}
+            </span>
+            User-Berechtigung
+          </div>
+        </div>
+      </div>
+      
+      <div class="actions">
+        <button (click)="logout()" class="logout-btn">Abmelden</button>
+      </div>
+    </section>
+  }
+  
+  <!-- Erklärungen -->
+  <section class="explanation">
+    <h3>OAuth-Konzepte:</h3>
+    <ul>
+      <li><strong>Authentication:</strong> Prüfung der Identität (Login)</li>
+      <li><strong>Authorization:</strong> Prüfung der Berechtigungen (Rollen)</li>
+      <li><strong>Token:</strong> Sicherer Schlüssel für API-Zugriffe</li>
+      <li><strong>OAuth Provider:</strong> Externer Dienst zur Authentifizierung</li>
+      <li><strong>Guards:</strong> Schützen Routen vor unbefugtem Zugriff</li>
+      <li><strong>Interceptors:</strong> Fügen Token zu HTTP-Requests hinzu</li>
+    </ul>
+  </section>
+</div>

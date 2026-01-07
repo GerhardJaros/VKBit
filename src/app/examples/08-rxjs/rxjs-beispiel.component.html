@@ -1,0 +1,126 @@
+<div class="container">
+  <h2>Asynchrone Programmierung mit RxJS</h2>
+  
+  <!-- Observable Basics -->
+  <section>
+    <h3>1. Observable Basics</h3>
+    <div class="controls">
+      <button (click)="startInterval()">Interval starten</button>
+      <button (click)="stopInterval()">Interval stoppen</button>
+    </div>
+    <p>Intervall-Zähler: <strong>{{ intervalWert }}</strong></p>
+  </section>
+  
+  <!-- Observable Creation -->
+  <section>
+    <h3>2. Observable Creation & Operatoren</h3>
+    <div class="controls">
+      <button (click)="simpleObservable()">Simple Observable</button>
+      <button (click)="observableMitTransformation()">Mit Transformation (map)</button>
+      <button (click)="observableMitFilter()">Mit Filter</button>
+      <button (click)="observableMitFehlerbehandlung()">Mit Fehlerbehandlung</button>
+    </div>
+    <div class="result">
+      <strong>Ergebnis:</strong> {{ ergebnis }}
+    </div>
+  </section>
+  
+  <!-- RxJS Operatoren -->
+  <section>
+    <h3>3. RxJS Operatoren</h3>
+    
+    <div class="operator-demo">
+      <h4>debounceTime & distinctUntilChanged (Suche)</h4>
+      <input 
+        type="text" 
+        [(ngModel)]="suchbegriff"
+        (ngModelChange)="onSucheChange($event)"
+        placeholder="Suchbegriff eingeben...">
+      <p>Gesuchter Begriff: <strong>{{ suchErgebnis }}</strong></p>
+    </div>
+    
+    <div class="operator-demo">
+      <h4>switchMap, mergeMap, concatMap</h4>
+      <div class="controls">
+        <button (click)="demonstriereSwitchMap()">switchMap Demo</button>
+        <button (click)="demonstriereMergeMap()">mergeMap Demo</button>
+        <button (click)="demonstriereConcatMap()">concatMap Demo</button>
+      </div>
+      <p>{{ operatorErgebnis }}</p>
+    </div>
+    
+    <div class="operator-demo">
+      <h4>Kombination: concat, merge, forkJoin</h4>
+      <div class="controls">
+        <button (click)="demonstriereConcat()">concat Demo</button>
+        <button (click)="demonstriereMerge()">merge Demo</button>
+        <button (click)="demonstriereForkJoin()">forkJoin Demo</button>
+      </div>
+      <p>{{ kombinationsErgebnis }}</p>
+    </div>
+  </section>
+  
+  <!-- HttpClient -->
+  <section>
+    <h3>4. HttpClient & API-Zugriffe</h3>
+    <div class="controls">
+      <button (click)="ladePost()" [disabled]="laedt">
+        {{ laedt ? 'Lädt...' : 'Post laden' }}
+      </button>
+      <button (click)="ladeMultiplePosts()" [disabled]="laedt">
+        Multiple Posts laden
+      </button>
+      <button (click)="simuliereFehler()">Fehler simulieren</button>
+    </div>
+    
+    @if (fehler) {
+      <div class="error-message">{{ fehler }}</div>
+    }
+    
+    @if (post) {
+      <div class="post-card">
+        <h4>{{ post.title }}</h4>
+        <p>{{ post.body }}</p>
+        <small>User ID: {{ post.userId }} | Post ID: {{ post.id }}</small>
+      </div>
+    }
+    
+    @if (posts.length > 0) {
+      <div class="posts-liste">
+        <h4>Geladene Posts:</h4>
+        @for (p of posts; track p.id) {
+          <div class="post-item">
+            <strong>{{ p.title }}</strong>
+          </div>
+        }
+      </div>
+    }
+  </section>
+  
+  <!-- Best Practices -->
+  <section class="explanation">
+    <h3>RxJS Best Practices:</h3>
+    <ul>
+      <li><strong>Subscription Management:</strong> Immer unsubscribe in ngOnDestroy</li>
+      <li><strong>takeUntil Pattern:</strong> Verwende Subject für automatisches Unsubscribe</li>
+      <li><strong>async Pipe:</strong> Automatisches Subscribe/Unsubscribe im Template</li>
+      <li><strong>Error Handling:</strong> Verwende catchError für Fehlerbehandlung</li>
+      <li><strong>Memory Leaks:</strong> Verhindere durch korrektes Unsubscribe</li>
+      <li><strong>Hot vs Cold:</strong> Verstehe den Unterschied zwischen Hot und Cold Observables</li>
+    </ul>
+    
+    <div class="code-example">
+      <h4>takeUntil Pattern:</h4>
+      <pre>private destroy$ = new Subject&lt;void&gt;();
+
+ngOnDestroy() &#123;
+  this.destroy$.next();
+  this.destroy$.complete();
+&#125;
+
+someObservable$
+  .pipe(takeUntil(this.destroy$))
+  .subscribe(...);</pre>
+    </div>
+  </section>
+</div>

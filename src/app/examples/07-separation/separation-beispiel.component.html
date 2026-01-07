@@ -1,0 +1,123 @@
+<div class="container">
+  <h2>Separation of Concerns</h2>
+  
+  <section>
+    <h3>1. Dependency Injection</h3>
+    <div class="info">
+      <p>Services werden über den Constructor injiziert:</p>
+      <div class="code-example">
+        <pre>constructor(
+  private loggerService: LoggerService,
+  private datenService: DatenService
+) &#123;&#125;</pre>
+      </div>
+    </div>
+  </section>
+  
+  <section>
+    <h3>2. Logger Service (Singleton)</h3>
+    <div class="controls">
+      <button (click)="loggeMeldung()">Log-Meldung erstellen</button>
+      <button (click)="loggeError()">Error loggen</button>
+      <button (click)="logsAnzeigen()">Logs anzeigen</button>
+      <button (click)="logsLoeschen()">Logs löschen</button>
+    </div>
+    
+    @if (zeigeLogs) {
+      <div class="logs">
+        <h4>Log-Einträge:</h4>
+        @if (logs.length > 0) {
+          <ul>
+            @for (log of logs; track $index) {
+              <li>{{ log }}</li>
+            }
+          </ul>
+        } @else {
+          <p class="empty">Keine Logs vorhanden</p>
+        }
+      </div>
+    }
+  </section>
+  
+  <section>
+    <h3>3. Daten Service (API-Abstraktion)</h3>
+    <div class="controls">
+      <button (click)="ladeProdukte()" [disabled]="laedt">
+        {{ laedt ? 'Lädt...' : 'Produkte laden' }}
+      </button>
+    </div>
+    
+    @if (fehler) {
+      <div class="error-message">{{ fehler }}</div>
+    }
+    
+    @if (produkte.length > 0) {
+      <div class="produkte-liste">
+        <h4>Produkte:</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Preis</th>
+              <th>Kategorie</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (produkt of produkte; track produkt.id) {
+              <tr>
+                <td>{{ produkt.id }}</td>
+                <td>{{ produkt.name }}</td>
+                <td>{{ produkt.preis | number:'1.2-2' }} €</td>
+                <td>{{ produkt.kategorie }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+  
+  <section>
+    <h3>4. Service Scopes</h3>
+    <div class="scope-info">
+      <div class="scope-card">
+        <h4>Root Scope (providedIn: 'root')</h4>
+        <ul>
+          <li>Singleton für die gesamte Anwendung</li>
+          <li>Wird nur einmal instanziiert</li>
+          <li>Automatisch Tree-Shakeable</li>
+          <li>Verwendung: LoggerService, DatenService</li>
+        </ul>
+      </div>
+      
+      <div class="scope-card">
+        <h4>Component Scope (providers: [ ])</h4>
+        <ul>
+          <li>Neue Instanz pro Komponente</li>
+          <li>Isolierter State</li>
+          <li>Verwendung: Komponentenspezifische Services</li>
+        </ul>
+      </div>
+      
+      <div class="scope-card">
+        <h4>Module Scope (veraltet)</h4>
+        <ul>
+          <li>Wurde in NgModules verwendet</li>
+          <li>Durch Standalone Components ersetzt</li>
+          <li>Verwendung: Legacy-Code</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <section class="explanation">
+    <h3>Vorteile der Separation of Concerns:</h3>
+    <ul>
+      <li><strong>Testbarkeit:</strong> Services können isoliert getestet werden</li>
+      <li><strong>Wiederverwendbarkeit:</strong> Services können in mehreren Komponenten verwendet werden</li>
+      <li><strong>Wartbarkeit:</strong> Business-Logik ist von der Präsentation getrennt</li>
+      <li><strong>Single Responsibility:</strong> Jede Klasse hat eine klar definierte Aufgabe</li>
+    </ul>
+  </section>
+</div>

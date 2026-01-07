@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Benutzer-Details</h2>
+  
+  <div class="info-card">
+    <h3>Route-Parameter</h3>
+    <p><strong>Benutzer-ID:</strong> {{ benutzerId }}</p>
+  </div>
+  
+  @if (queryParams && getObjectKeys(queryParams).length > 0) {
+    <div class="info-card">
+      <h3>Query-Parameter</h3>
+      @for (param of getQueryParamEntries(); track param.key) {
+        <p><strong>{{ param.key }}:</strong> {{ param.value }}</p>
+      }
+    </div>
+  }
+  
+  <div class="actions">
+    <a routerLink="/routing" class="btn">Zurück zum Routing-Beispiel</a>
+  </div>
+</div>

@@ -1,0 +1,174 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h2 {
+  color: #dd0031;
+  border-bottom: 2px solid #dd0031;
+  padding-bottom: 10px;
+}
+
+h3 {
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+section {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.pipe-demo {
+  padding: 15px;
+  background-color: white;
+  border-radius: 4px;
+  margin: 15px 0;
+  border-left: 4px solid #dd0031;
+}
+
+.pipe-demo h4 {
+  margin-top: 0;
+  color: #dd0031;
+}
+
+.pipe-demo p {
+  margin: 10px 0;
+}
+
+.pipe-demo pre {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+input[type="text"],
+select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.personen-tabelle {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #dd0031;
+  color: white;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+td.empty {
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  padding: 30px;
+}
+
+.stats {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+}
+
+.stats p {
+  margin: 5px 0;
+}
+
+.explanation {
+  background-color: #e3f2fd;
+}
+
+.concept {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.concept h4 {
+  margin-top: 0;
+  color: #dd0031;
+}
+
+.concept ul {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+.concept li {
+  margin: 8px 0;
+}
+
+.code-example {
+  background-color: #2d2d2d;
+  color: #f8f8f2;
+  padding: 15px;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin-top: 15px;
+}
+
+.code-example pre {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  background-color: transparent;
+  color: inherit;
+}
+
+.best-practices {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff3cd;
+  border-left: 4px solid #ffc107;
+  border-radius: 4px;
+}
+
+.best-practices h4 {
+  margin-top: 0;
+  color: #856404;
+}
+
+.best-practices ul {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+.best-practices li {
+  margin: 8px 0;
+}

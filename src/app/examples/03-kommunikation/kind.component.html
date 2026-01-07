@@ -1,0 +1,19 @@
+<div class="kind-container" [class.aktiv]="aktiv">
+  <h4>{{ titel }}</h4>
+  
+  <div class="info">
+    <p>Zähler (von Eltern): {{ zaehler }}</p>
+    <p>Lokaler Zähler: {{ lokalerZaehler }}</p>
+    <p>Status: {{ aktiv ? 'Aktiv' : 'Inaktiv' }}</p>
+  </div>
+  
+  <div class="controls">
+    <button (click)="erhoeheLokalenZaehler()">Lokalen Zähler erhöhen</button>
+    <button (click)="sendeNachricht()">Nachricht an Eltern senden</button>
+  </div>
+  
+  <!-- Content Projection -->
+  <div class="projected-content">
+    <ng-content></ng-content>
+  </div>
+</div>

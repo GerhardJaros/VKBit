@@ -1,0 +1,16 @@
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ROUTES } from './routes.constants';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, RouterModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  ROUTES = ROUTES;
+  title = 'VKBit';
+}

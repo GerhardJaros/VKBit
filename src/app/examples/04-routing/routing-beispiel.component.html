@@ -1,0 +1,80 @@
+<div class="container">
+  <h2>Routing-Beispiel</h2>
+  
+  <section>
+    <h3>1. Deklarative Navigation mit routerLink</h3>
+    <nav class="navigation">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        Home
+      </a>
+      <a routerLink="/komponenten" routerLinkActive="active">
+        Komponenten
+      </a>
+      <a routerLink="/formulare" routerLinkActive="active">
+        Formulare
+      </a>
+      <a [routerLink]="['/benutzer', 123]" routerLinkActive="active">
+        Benutzer 123
+      </a>
+      <a [routerLink]="['/benutzer', 456]" 
+         [queryParams]="{tab: 'profil', edit: 'true'}" 
+         routerLinkActive="active">
+        Benutzer 456 (mit Query-Params)
+      </a>
+    </nav>
+  </section>
+  
+  <section>
+    <h3>2. Programmatische Navigation</h3>
+    <div class="controls">
+      <button (click)="navigiereZuKomponenten()">
+        Navigiere zu Komponenten
+      </button>
+      <button (click)="navigiereZuBenutzer(789)">
+        Navigiere zu Benutzer 789
+      </button>
+      <button (click)="navigiereMitQueryParams()">
+        Navigation mit Query-Parametern
+      </button>
+      <button (click)="navigiereZurueck()">
+        ← Zurück
+      </button>
+      <button (click)="navigiereVorwaerts()">
+        Vorwärts →
+      </button>
+    </div>
+  </section>
+  
+  <section>
+    <h3>3. Route Constants (Type-Safe Routing)</h3>
+    <p>Beispiel für typsichere Route-Definitionen:</p>
+    <div class="code-example">
+      <pre>{{ routeConstantsExample }}</pre>
+    </div>
+    <div class="controls">
+      <button (click)="navigiereMitConstant()">
+        Navigation mit Route-Konstante
+      </button>
+    </div>
+  </section>
+  
+  <section>
+    <h3>4. Aktuelle Route-Informationen</h3>
+    <div class="info">
+      <p><strong>Aktuelle URL:</strong> {{ aktuelleUrl }}</p>
+      <p><strong>Route-Pfad:</strong> {{ routePfad }}</p>
+    </div>
+  </section>
+  
+  <section>
+    <h3>5. Relative Navigation</h3>
+    <div class="controls">
+      <button (click)="relativeNavigation('../')">
+        Eine Ebene nach oben
+      </button>
+      <button (click)="relativeNavigation('./details')">
+        Zu Details (relativ)
+      </button>
+    </div>
+  </section>
+</div>

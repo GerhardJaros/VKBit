@@ -1,0 +1,192 @@
+<div class="container">
+  <h2>Pipes und Filter</h2>
+  
+  <!-- Built-in Pipes -->
+  <section>
+    <h3>1. Built-in Pipes</h3>
+    
+    <div class="pipe-demo">
+      <h4>Date Pipe</h4>
+      <p>Aktuelles Datum: {{ heute | date:'dd.MM.yyyy' }}</p>
+      <p>Mit Uhrzeit: {{ heute | date:'dd.MM.yyyy HH:mm:ss' }}</p>
+      <p>Kurz: {{ heute | date:'short' }}</p>
+      <p>Lang: {{ heute | date:'full' }}</p>
+    </div>
+    
+    <div class="pipe-demo">
+      <h4>Currency Pipe</h4>
+      <p>Preis EUR: {{ preis | currency:'EUR' }}</p>
+      <p>Preis USD: {{ preis | currency:'USD' }}</p>
+      <p>Preis CHF: {{ preis | currency:'CHF' }}</p>
+    </div>
+    
+    <div class="pipe-demo">
+      <h4>Percent Pipe</h4>
+      <p>Prozentsatz: {{ prozent | percent }}</p>
+      <p>Mit 2 Nachkommastellen: {{ prozent | percent:'1.2-2' }}</p>
+    </div>
+    
+    <div class="pipe-demo">
+      <h4>Number Pipe</h4>
+      <p>Zahl: {{ zahl | number }}</p>
+      <p>Mit 2 Nachkommastellen: {{ zahl | number:'1.2-2' }}</p>
+    </div>
+    
+    <div class="pipe-demo">
+      <h4>Uppercase / Lowercase Pipes</h4>
+      <p>Original: {{ text }}</p>
+      <p>Uppercase: {{ text | uppercase }}</p>
+      <p>Lowercase: {{ text | lowercase }}</p>
+      <p>Titlecase: {{ text | titlecase }}</p>
+    </div>
+    
+    <div class="pipe-demo">
+      <h4>JSON Pipe (für Debugging)</h4>
+      <pre>{{ testObjekt | json }}</pre>
+    </div>
+  </section>
+  
+  <!-- Custom Pipes -->
+  <section>
+    <h3>2. Custom Pipes</h3>
+    
+    <div class="pipe-demo">
+      <h4>Truncate Pipe</h4>
+      <p>Original: {{ langerText }}</p>
+      <p>Gekürzt (20): {{ langerText | truncate:20 }}</p>
+      <p>Gekürzt (30): {{ langerText | truncate:30:'...' }}</p>
+    </div>
+    
+    <div class="pipe-demo">
+      <h4>TimeAgo Pipe</h4>
+      <p>Vor 5 Minuten: {{ vor5Minuten | timeAgo }}</p>
+      <p>Vor 2 Stunden: {{ vor2Stunden | timeAgo }}</p>
+      <p>Vor 3 Tagen: {{ vor3Tagen | timeAgo }}</p>
+    </div>
+    
+    <div class="pipe-demo">
+      <h4>FileSize Pipe</h4>
+      <p>1024 Bytes: {{ 1024 | fileSize }}</p>
+      <p>1048576 Bytes: {{ 1048576 | fileSize }}</p>
+      <p>1073741824 Bytes: {{ 1073741824 | fileSize }}</p>
+    </div>
+  </section>
+  
+  <!-- Pipe Chaining -->
+  <section>
+    <h3>3. Pipe Chaining (Verkettung)</h3>
+    <div class="pipe-demo">
+      <p>Original: {{ heute }}</p>
+      <p>Datum → Uppercase: {{ heute | date:'full' | uppercase }}</p>
+      <p>Preis → Currency → Uppercase: {{ preis | currency:'EUR' | uppercase }}</p>
+    </div>
+  </section>
+  
+  <!-- Filter & Sort -->
+  <section>
+    <h3>4. Filter & Sort mit Custom Pipes</h3>
+    
+    <div class="controls">
+      <input 
+        type="text" 
+        [(ngModel)]="suchbegriff" 
+        placeholder="Nach Name suchen...">
+      
+      <select [(ngModel)]="sortierfeld">
+        <option value="name">Nach Name</option>
+        <option value="alter">Nach Alter</option>
+        <option value="gehalt">Nach Gehalt</option>
+        <option value="abteilung">Nach Abteilung</option>
+      </select>
+      
+      <select [(ngModel)]="sortierrichtung">
+        <option value="asc">Aufsteigend</option>
+        <option value="desc">Absteigend</option>
+      </select>
+    </div>
+    
+    <div class="personen-tabelle">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Alter</th>
+            <th>Gehalt</th>
+            <th>Abteilung</th>
+            <th>Erstellt</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (person of personen | filterArray:suchbegriff:'name' | sortBy:sortierfeld:sortierrichtung; track person.id) {
+            <tr>
+              <td>{{ person.id }}</td>
+              <td>{{ person.name }}</td>
+              <td>{{ person.alter }}</td>
+              <td>{{ person.gehalt | currency:'EUR' }}</td>
+              <td>{{ person.abteilung }}</td>
+              <td>{{ person.erstelltAm | timeAgo }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty">Keine Ergebnisse gefunden</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="stats">
+      <p>Anzahl Personen: {{ personen.length }}</p>
+      <p>Gefilterte Personen: {{ (personen | filterArray:suchbegriff:'name').length }}</p>
+    </div>
+  </section>
+  
+  <!-- Pure vs Impure Pipes -->
+  <section class="explanation">
+    <h3>Pure vs. Impure Pipes:</h3>
+    
+    <div class="concept">
+      <h4>Pure Pipes (Standard)</h4>
+      <ul>
+        <li>Werden nur ausgeführt bei Änderungen von Primitive Values</li>
+        <li>Performanter, da weniger Change Detection</li>
+        <li>Beispiel: date, currency, uppercase</li>
+      </ul>
+      <div class="code-example">
+        <pre>&#64;Pipe({{ '{' }}
+  name: 'myPipe',
+  standalone: true,
+  pure: true  // Standard
+{{ '}' }}))</pre>
+      </div>
+    </div>
+    
+    <div class="concept">
+      <h4>Impure Pipes</h4>
+      <ul>
+        <li>Werden bei jeder Change Detection ausgeführt</li>
+        <li>Notwendig für Arrays und Objekte, die mutiert werden</li>
+        <li>Performance-Auswirkungen beachten!</li>
+      </ul>
+      <div class="code-example">
+        <pre>&#64;Pipe({{ '{' }}
+  name: 'myPipe',
+  standalone: true,
+  pure: false  // Impure
+{{ '}' }}))</pre>
+      </div>
+    </div>
+    
+    <div class="best-practices">
+      <h4>Best Practices:</h4>
+      <ul>
+        <li>Verwende Pure Pipes wo möglich</li>
+        <li>Halte Pipe-Logik einfach und schnell</li>
+        <li>Vermeide HTTP-Calls in Pipes</li>
+        <li>Nutze Pipes für Präsentationslogik, nicht Business-Logik</li>
+        <li>Teste Custom Pipes gründlich</li>
+      </ul>
+    </div>
+  </section>
+</div>
